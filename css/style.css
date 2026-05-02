@@ -1,0 +1,49 @@
+/* 全局深色背景 */
+body {
+  background: #1a1a2e !important;
+  color: #eee !important;
+  font-family: 'PingFang SC','Microsoft YaHei',sans-serif;
+}
+
+/* 顶部导航磨砂 */
+#nav {
+  backdrop-filter: blur(12px);
+  background: rgba(20,20,40,0.75) !important;
+}
+
+/* 卡片磨砂+圆角 */
+.card, #aside-content .card-widget, .recent-posts .recent-post-item {
+  background: rgba(255,255,255,0.08) !important;
+  backdrop-filter: blur(10px);
+  border-radius: 14px !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* 文字颜色调整 */
+.card-widget, .recent-post-info, .article-title, a {
+  color: #ddd !important;
+}
+a:hover {
+  color: #fff !important;
+}
+
+/* 滚动条美化 */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.2);
+  border-radius: 3px;
+}
+
+/* 进度条颜色加亮 */
+#todayBar { background: #66bb6a !important; }
+#weekBar  { background: #42a5f5 !important; }
+#monthBar { background: #ffa726 !important; }
+#yearBar  { background: #ef5350 !important; }
+
+/* 天气和倒计时文字 */
+#liveClock, #countdowns, #weatherWidget {
+  color: #eee !important;
+}
