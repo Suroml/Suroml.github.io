@@ -1,26 +1,39 @@
-// 鼠标跟踪圆圈（白色，无延迟）
+// 鼠标跟随实心圆 + 灵动缓动（基于 left/top，稳定）
 (function() {
-  var cursor = document.createElement('div');
-  cursor.id = 'custom-cursor';
-  cursor.style.cssText = `
-    position: fixed;
-    width: 24px;
-    height: 24px;
-    border: 2px solid rgba(255,255,255,0.8);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 0 6px rgba(255,255,255,0.3);
-    transition: none;
-  `;
-  document.body.appendChild(cursor);
+    var cursor = document.createElement('div');
+    cursor.id = 'custom-cursor';
+    cursor.style.cssText = `
+        position: fixed;
+        width: 20px;
+        height: 20px;
+        background: rgba(255, 255, 255, 0.4);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        box-shadow: 0 0 8px rgba(255,255,255,0.6);
+        will-change: left, top;
+    `;
+    document.body.appendChild(cursor);
 
-  let mouseX = 0, mouseY = 0;
-  document.addEventListener('mousemove', function(e) {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    cursor.style.left = mouseX + 'px';
-    cursor.style.top = mouseY + 'px';
-  });
+    var mouseX = 0, mouseY = 0;   // 鼠标实际坐标（中心点）
+    var curX = 0, curY = 0;       // 圆圈当前坐标
+
+    document.addEventListener('mousemove', function(e) {
+        // 圆圈中心对准鼠标箭头，所以不需要偏移
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    function animate() {
+        var easing = 0.25;
+        curX += (mouseX - curX) * easing;
+        curY += (mouseY - curY) * easing;
+        
+        // 使用 left/top 并偏移自身一半宽高，使中心对准鼠标
+        cursor.style.left = (curX - 10) + 'px';
+        cursor.style.top  = (curY - 10) + 'px';
+        
+        requestAnimationFrame(animate);
+    }
+    animate();
 })();

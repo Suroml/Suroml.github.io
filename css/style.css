@@ -47,3 +47,69 @@ a:hover {
 #liveClock, #countdowns, #weatherWidget {
   color: #eee !important;
 }
+/* ===== 进度条流动效果 + 鼠标悬浮反馈 ===== */
+
+/* 进度条容器（假设你的进度条父元素有 class="progress-bar"） */
+.progress-bar {
+    background: rgba(255,255,255,0.15);
+    border-radius: 10px;
+    overflow: hidden;
+    height: 8px;
+    margin: 6px 0;
+    transition: all 0.2s ease;
+}
+
+/* 进度填充条（假设 class="progress"） */
+.progress-bar .progress {
+    height: 100%;
+    width: 0%;  /* 实际宽度由行内样式决定，如 style="width: 82.9%" */
+    background: linear-gradient(90deg, 
+        rgba(100,200,255,0.9) 0%, 
+        rgba(50,150,255,0.9) 50%,
+        rgba(100,200,255,0.9) 100%);
+    background-size: 200% 100%;
+    border-radius: 10px;
+    animation: flowMove 2s linear infinite;
+    transition: all 0.2s ease;
+}
+
+/* 流动动画 */
+@keyframes flowMove {
+    0% { background-position: 100% 0; }
+    100% { background-position: -100% 0; }
+}
+
+/* 鼠标悬浮在进度条容器上的反馈：放大 + 发光 */
+.progress-bar:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 8px rgba(100,200,255,0.6);
+}
+
+.progress-bar:hover .progress {
+    background: linear-gradient(90deg, 
+        rgba(150,230,255,1) 0%, 
+        rgba(80,180,255,1) 50%,
+        rgba(150,230,255,1) 100%);
+    background-size: 200% 100%;
+}
+/* 进度条悬浮 + 流动效果 */
+.progress-bar {
+    transition: all 0.2s ease;
+}
+.progress-bar .progress {
+    background-size: 200% 100% !important;
+    background-image: linear-gradient(90deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.3) 100%) !important;
+    animation: flowMove 1.5s linear infinite;
+    border-radius: 2px;
+}
+@keyframes flowMove {
+    0% { background-position: 100% 0; }
+    100% { background-position: -100% 0; }
+}
+.progress-bar:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 8px rgba(100,200,255,0.5);
+}
+.progress-bar:hover .progress {
+    filter: brightness(1.2);
+}
